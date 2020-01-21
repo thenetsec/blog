@@ -1,4 +1,4 @@
 [submodule "public"]
 	path = public
 	url = https://github.com/thenetsec/thenetsec.github.io.git
-	branch = origin
+	branch = master
