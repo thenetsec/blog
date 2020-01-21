@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on TheNetSec</title>
+    <link>https://thenetsec.github.io/blog/</link>
+    <description>Recent content in Blogs on TheNetSec</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Jan 2020 18:52:27 +0000</lastBuildDate>
+    
+	<atom:link href="https://thenetsec.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Adobe Experience Manager Exploitation</title>
+      <link>https://thenetsec.github.io/blog/2018-07-23_adobe-experience-manager-exploitation-24bd9eb75ed9/</link>
+      <pubDate>Fri, 10 Jan 2020 18:52:27 +0000</pubDate>
+      
+      <guid>https://thenetsec.github.io/blog/2018-07-23_adobe-experience-manager-exploitation-24bd9eb75ed9/</guid>
+      <description>I was recently working on an external penetration testing assessment in which the only information provided to me was the IP address range.</description>
+    </item>
+    
+    <item>
+      <title>Spear Phishing with Go phish Framework</title>
+      <link>https://thenetsec.github.io/blog/2017-10-18_spear-phishing-with-go-phish-framework-516489b59715/</link>
+      <pubDate>Tue, 07 Jan 2020 16:21:22 +0000</pubDate>
+      
+      <guid>https://thenetsec.github.io/blog/2017-10-18_spear-phishing-with-go-phish-framework-516489b59715/</guid>
+      <description>What is Spear Phishing? Spear phishing is an e-mail spoofing fraud attempt that targets a specific organization, seeking unauthorized access to confidential data.</description>
+    </item>
+    
+    <item>
+      <title>Kerberoast Attack Techniques</title>
+      <link>https://thenetsec.github.io/blog/2017-11-01_kerberoast-attack-techniques-79dd0166a65d/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://thenetsec.github.io/blog/2017-11-01_kerberoast-attack-techniques-79dd0166a65d/</guid>
+      <description>In this blog we will focus on Kerberoast attack techniques (Old Technique and New Technique). I will try to cover the basics about Kerberos protocol and then we will see the attacking techniques from a penetration testing perspective.</description>
+    </item>
+    
+  </channel>
+</rss>

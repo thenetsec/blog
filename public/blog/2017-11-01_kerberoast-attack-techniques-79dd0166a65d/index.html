@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>Kerberoast Attack Techniques</title>
+
+    <!-- mobile responsive meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="In this blog we will focus on Kerberoast attack techniques (Old Technique and New Technique). I will try to cover the basics about Kerberos…">
+    
+    <meta name="author" content="Themefisher">
+    <meta name="generator" content="Hugo 0.62.2" />
+
+    <!-- plugins -->
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/bootstrap/bootstrap.min.css ">
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/themify-icons/themify-icons.css ">
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/animate-css/animate.css ">
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/magnific-popup/magnific-popup.css ">
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/slick/slick.css ">
+    
+
+    <!-- Main Stylesheet -->
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/css/style.min.css" media="screen">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="https://thenetsec.github.io/images/favicon.png " type="image/x-icon">
+    <link rel="icon" href="https://thenetsec.github.io/images/favicon.png " type="image/x-icon">
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+<!-- Fixed Navigation -->
+<nav id="navigation" class="navbar navbar-expand-lg navigation sticky-top">
+	<div class="container">
+
+		<!-- logo -->
+		<a class="navbar-brand logo" href="/">
+			
+			TheNetSec
+			
+		</a>
+		<!-- /logo -->
+
+		<!-- responsive nav button -->
+		<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- /responsive nav button -->
+
+		<!-- main nav -->
+		
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto navigation-menu">
+				<li class="nav-item"><a class="nav-link" href="/#body">Home</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="/#about">About Me</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="/#blog">Blog</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="/#contact">Contact</a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- /main nav -->
+
+		
+    
+	</div>
+</nav>
+<!-- End Fixed Navigation -->
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <h1>Kerberoast Attack Techniques</h1>
+        <ul class="list-inline mb-50">
+          <li class="list-inline-item"><a href="/author/"></a></li>
+          <li class="list-inline-item">Monday, Jan 1, 0001</li>
+        </ul>
+        <img class="img-fluid mb-50" src="https://thenetsec.github.io/images/blog/KR.png" alt="blog-image">
+      </div>
+      <div class="col-lg-8 offset-lg-2">
+        <div class="post-single-content">
+          <p>In this blog we will focus on Kerberoast attack techniques (Old Technique and New Technique). I will try to cover the basics about Kerberos protocol and then we will see the attacking techniques from a penetration testing perspective.</p>
+<h4 id="what-is-kerberos">What is Kerberos?</h4>
+<p>Kerberos is designed to provide authentication of user identity in a networked computing environment consisting of workstations and servers.</p>
+<p><strong>Kerberos in a Nutshell.</strong></p>
+<p>The Kerberos authentication system is built on top of tickets served by KDC. The core idea behind Kerberos is that the users don’t share account passwords to each service they want to use. Instead, they share a ticket which they get from KDC.</p>
+<p>When a user first starts using the system, they will use their password to get a master ticket called a TGT (<strong>ticket-granting ticket</strong>). This master ticket expires in 25 hours, after which, the user will need to enter the password again to get another one.</p>
+<p>When the user needs service access, that uses Kerberos, they will show that master ticket (TGT) to the Kerberos server and get a ticket specifically for that service. Then, shows the ticket just for that service to the service to prove who you are.</p>
+<p><strong>Steps in Kerberos Authentication</strong></p>
+<blockquote>
+<p><em>1. Password converted to <strong>NTLM hash</strong>, a timestamp is encrypted with the hash and sent to the KDC as an authenticator in the authentication ticket (TGT) request (AS-Request).</em></p>
+</blockquote>
+<blockquote>
+<p><em>2. The <strong>Domain Controller</strong> (KDC) checks user information &amp; creates <strong>Ticket-Granting Ticket</strong> (TGT).</em></p>
+</blockquote>
+<blockquote>
+<p><em>3. The TGT is encrypted, signed, &amp; delivered to the user (AS-Reply). Only the Kerberos service (<strong>KRBTGT</strong>) in the domain can open and read TGT data.</em></p>
+</blockquote>
+<blockquote>
+<p><em>4. The User presents the TGT to the DC when requesting a <strong>Ticket Granting Service</strong> (TGS) ticket (TGS-Request). The data in the TGT is effectively copied to create the TGS ticket.</em></p>
+</blockquote>
+<blockquote>
+<p><em>5. The TGS is encrypted using the target service accounts’ NTLM password hash and sent to the user (TGS-Reply).</em></p>
+</blockquote>
+<blockquote>
+<p><em>6. The user connects to the server hosting the service on the appropriate port &amp; presents the TGS. The service opens the TGS ticket using its NTLM password hash.</em></p>
+</blockquote>
+<p><strong>Kerberos Attacks:</strong></p>
+<p>There are several different types of Kerberos attacks ranging from recon (SPN Scanning), to offline service account password cracking (Kerberoast), to persistence (Silver &amp; Golden Tickets).</p>
+<blockquote>
+<p>Here are the most popular AD Kerberos attacks:</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>1. <strong>SPN Scanning</strong> — finding services by requesting service principal names of a specific SPN class/type.<br>
+2. <strong>Silver Ticket</strong> — forged Kerberos TGS service ticket<br>
+3. <strong>Golden Ticket</strong> — forged Kerberos TGT authentication ticket<br>
+4. <strong>MS14–068 Forged PAC Exploit</strong> - exploitation of the Kerberos vulnerability on Domain Controllers.<br>
+Etc.</p>
+</blockquote>
+</blockquote>
+<p>Now, let’s see how we can leverage the Kerberos implementation to our advantage.</p>
+<h4 id="old-technique">Old Technique</h4>
+<p>We will see and understand the old technique first (i.e. SPN Scanning and then cracking the tickets).</p>
+<p>In general, we follow the process below:</p>
+<p>1. Enumerate the domain accounts with SPNs set- either with GetUserSPNS.ps1 script from PowerView’s or Impacket’s “GetUserSPN.py“.</p>
+<p>2. Request TGSs for these specific SPNs with the built-in Windows tool setspn.exe.</p>
+<p>3. Extract these tickets from memory by invoking the kerberos::list /export Mimikatz command, with the optional base64 export format set first. The tickets were then downloaded, or the base64-encoded versions pulled down to the attacker’s machine and decoded. (Note: You don’t need admin rights to execute the command :))</p>
+<p>4. Begin offline password cracking with “tgsrepcrack.py”, or John whit the help for kirbi2john.py.</p>
+<p>Let’s see the Demo :)</p>
+<p>We can scan the services with windows built-in utility. I have used in-built utility (i.e setspn.exe).</p>
+<p><img src="/images/blog/1__eV3JOkNM0ez5wyxqO__2AfA.png" alt="“setspn.exe” output">
+“setspn.exe” output</p>
+<p>Now, if you notice we have “CN= Computers” and “CN=Users” for listed service accounts. We will be focusing on “CN=Users” as these are user generated and so we can try to crack :).</p>
+<p><img src="/images/blog/1__9sdOqlsakZ__WlzlYBCiOBw.png" alt=""></p>
+<p>Now that we know the service accounts which we will be cracking or trying to crack, let’s go ahead and request Kerberos tickets for specific service accounts.</p>
+<blockquote>
+<p><strong>Command</strong>: Add-Type -AssemblyName System.IdentityModel<br>
+New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken –ArgumentList “SPN Name”</p>
+</blockquote>
+<p><img src="/images/blog/1__1pyTys__V3wYA4x3FJAwDXg.png" alt="Powershell Command (Non Admin User)">
+Powershell Command (Non Admin User)</p>
+<p>Now, we have tickets in memory. We will use Mimikatz to export the tickets from memory. This is one of the down side of this method as you are running Mimikatz this might trigger Alert or this can be detected by AV’s.</p>
+<p>Note: You can also load Mimikatz into memory using PowerShell<br>
+“IEX (New-Object Net.WebClient).DownloadString” feature)</p>
+<blockquote>
+<p><strong>Command:</strong> Invoke-Pwc -Command ‘“kerberos::list /export” exit”’</p>
+</blockquote>
+<p><img src="/images/blog/1____OEUj3L7XVFHiUezzPPaVw.png" alt="Export Ticket from Memory">
+Export Ticket from Memory<img src="/images/blog/1__pVBtLvCx8qeYC8my6GHZIw.png" alt="Extracted Tickets">
+Extracted Tickets</p>
+<p>We have successfully extracted the tickets from memory. Can we crack these tickets??<br>
+There are multiple ways to try this. Let’s see how we can leverage tgsrepcrack.py form Kerberoast toolkit.</p>
+<p>1 &gt; Using Kerberosast: Tgsrepcrack.py</p>
+<p>We have provided the wordlist to crack the kirbi file</p>
+<blockquote>
+<p><strong>Command:</strong> C:\Users\pratik\Desktop\kerberoast&gt;python tgsrepcrack.py dict.txt “Ticket.kirbi”</p>
+</blockquote>
+<p><img src="/images/blog/1__clSmimsPL3AqYOlYfiL__sg.png" alt="Cracked Ticket">
+Cracked Ticket</p>
+<p>:) Cracked</p>
+<p>2&gt; Convert .kirbi file to John format</p>
+<p>Now, we will use John to crack the tickets. We know that tickets are in kirbi format so first we will convert the ticket to John format. We can use Kerberoast (kirbi2john.py) for the same.</p>
+<p><img src="/images/blog/1__bE1vtiRaTiJtutR2vaTWew.png" alt="John format">
+John format</p>
+<blockquote>
+<p><strong>Command:</strong>./john –format=krb5tgs crack_file — wordlist=dict.txt</p>
+</blockquote>
+<p><img src="/images/blog/1__COgpebl9Pj0CFvI9XCMyYA.png" alt="Cracked using John">
+Cracked using John</p>
+<p>Cracked :)</p>
+<h4 id="new-technique">New Technique</h4>
+<p>HarmJ0y has written a good blog on kerberoasting without Mimikatz. This technique is pretty straight forward and simpler than the old technique :)</p>
+<p>What you need is “Invoke-Kerberoast.ps1” and then you are good to go :)<br>
+To crack the tickets, first import “.ps1” module.</p>
+<p>This will request the associated TGS Tickets in john or hashcat crackable format :)</p>
+<p><img src="/images/blog/1__6hOtKGmLQB__bbHkxmV54JQ.png" alt="Invoke-Kerberoast">
+Invoke-Kerberoast</p>
+<p>Crack the tickets using John</p>
+<p><img src="/images/blog/1__brqC58Ztu1P__ja6un6HNoQ.png" alt="Cracked using John">
+Cracked using John</p>
+<p>Feel free to submit your feedback and comments :)</p>
+
+        </div>
+        
+        
+
+<div class="social-share pt-4">
+	<h4>Share:</h4>
+	
+	<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fthenetsec.github.io%2fblog%2f2017-11-01_kerberoast-attack-techniques-79dd0166a65d%2f" target="_blank"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Kerberoast%20Attack%20Techniques&amp;url=https%3a%2f%2fthenetsec.github.io%2fblog%2f2017-11-01_kerberoast-attack-techniques-79dd0166a65d%2f"
+		target="_blank" rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="https://plus.google.com/share?url=https%3a%2f%2fthenetsec.github.io%2fblog%2f2017-11-01_kerberoast-attack-techniques-79dd0166a65d%2f" target="_blank"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--google resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M11.37 12.93c-.73-.52-1.4-1.27-1.4-1.5 0-.43.03-.63.98-1.37 1.23-.97 1.9-2.23 1.9-3.57 0-1.22-.36-2.3-1-3.05h.5c.1 0 .2-.04.28-.1l1.36-.98c.16-.12.23-.34.17-.54-.07-.2-.25-.33-.46-.33H7.6c-.66 0-1.34.12-2 .35-2.23.76-3.78 2.66-3.78 4.6 0 2.76 2.13 4.85 5 4.9-.07.23-.1.45-.1.66 0 .43.1.83.33 1.22h-.08c-2.72 0-5.17 1.34-6.1 3.32-.25.52-.37 1.04-.37 1.56 0 .5.13.98.38 1.44.6 1.04 1.84 1.86 3.55 2.28.87.23 1.82.34 2.8.34.88 0 1.7-.1 2.5-.34 2.4-.7 3.97-2.48 3.97-4.54 0-1.97-.63-3.15-2.33-4.35zm-7.7 4.5c0-1.42 1.8-2.68 3.9-2.68h.05c.45 0 .9.07 1.3.2l.42.28c.96.66 1.6 1.1 1.77 1.8.05.16.07.33.07.5 0 1.8-1.33 2.7-3.96 2.7-1.98 0-3.54-1.23-3.54-2.8zM5.54 3.9c.33-.38.75-.58 1.23-.58h.05c1.35.05 2.64 1.55 2.88 3.35.14 1.02-.08 1.97-.6 2.55-.32.37-.74.56-1.23.56h-.03c-1.32-.04-2.63-1.6-2.87-3.4-.13-1 .08-1.92.58-2.5zM23.5 9.5h-3v-3h-2v3h-3v2h3v3h2v-3h3" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="mailto:?subject=Kerberoast%20Attack%20Techniques&amp;body=https%3a%2f%2fthenetsec.github.io%2fblog%2f2017-11-01_kerberoast-attack-techniques-79dd0166a65d%2f" target="_self"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17 0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1 0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08 0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+</div>
+        
+        
+        <div class="mt-5">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="https://twitter.com/7echsec"><i class="ti-twitter-alt"></i></a></li>
+						
+						<li class="list-inline-item"><a href="https://in.linkedin.com/in/pratik-shah-8a589220"><i class="ti-linkedin"></i></a></li>
+						
+						<li class="list-inline-item"><a href="https://github.com/pr4tik"><i class="ti-dribbble"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://thenetsec.github.io">
+					</a>
+					<p>copyright © 2019</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+
+<!-- JS Plugins -->
+
+<script src="https://thenetsec.github.io/plugins/jquery/jquery.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/slick/slick.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/wow/wow.min.js"></script>
+
+<!-- Main Script -->
+
+<script src="https://thenetsec.github.io/js/script.min.js"></script>
+<!-- google analitycs -->
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+
+</html>

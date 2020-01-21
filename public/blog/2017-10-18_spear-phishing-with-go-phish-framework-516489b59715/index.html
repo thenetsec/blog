@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>Spear Phishing with Go phish Framework</title>
+
+    <!-- mobile responsive meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="What is Spear Phishing?">
+    
+    <meta name="author" content="Themefisher">
+    <meta name="generator" content="Hugo 0.62.2" />
+
+    <!-- plugins -->
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/bootstrap/bootstrap.min.css ">
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/themify-icons/themify-icons.css ">
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/animate-css/animate.css ">
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/magnific-popup/magnific-popup.css ">
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/plugins/slick/slick.css ">
+    
+
+    <!-- Main Stylesheet -->
+    
+    <link rel="stylesheet" href="https://thenetsec.github.io/css/style.min.css" media="screen">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="https://thenetsec.github.io/images/favicon.png " type="image/x-icon">
+    <link rel="icon" href="https://thenetsec.github.io/images/favicon.png " type="image/x-icon">
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+<!-- Fixed Navigation -->
+<nav id="navigation" class="navbar navbar-expand-lg navigation sticky-top">
+	<div class="container">
+
+		<!-- logo -->
+		<a class="navbar-brand logo" href="/">
+			
+			TheNetSec
+			
+		</a>
+		<!-- /logo -->
+
+		<!-- responsive nav button -->
+		<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- /responsive nav button -->
+
+		<!-- main nav -->
+		
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto navigation-menu">
+				<li class="nav-item"><a class="nav-link" href="/#body">Home</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="/#about">About Me</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="/#blog">Blog</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="/#contact">Contact</a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- /main nav -->
+
+		
+    
+	</div>
+</nav>
+<!-- End Fixed Navigation -->
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <h1>Spear Phishing with Go phish Framework</h1>
+        <ul class="list-inline mb-50">
+          <li class="list-inline-item"><a href="/author/"></a></li>
+          <li class="list-inline-item">Tuesday, Jan 7, 2020</li>
+        </ul>
+        <img class="img-fluid mb-50" src="https://thenetsec.github.io/images/blog/SP.jpg" alt="blog-image">
+      </div>
+      <div class="col-lg-8 offset-lg-2">
+        <div class="post-single-content">
+          <h4 id="what-is-spear-phishing">What is Spear Phishing?</h4>
+<p>Spear phishing is an e-mail spoofing fraud attempt that targets a specific organization, seeking unauthorized access to confidential data. Spear phishing attempts are not typically initiated by “random hackers” but are more likely to be conducted by perpetrators out for financial gain, trade secrets or military information.</p>
+<p><strong>Phishing vs Spear Phishing</strong></p>
+<p>Spear-phishing can easily be confused with phishing because they are both online attacks on users that aim to acquire confidential information. The attackers often disguise themselves as a trustworthy entity and make contact with their target via email, social media, and even text messages. Spear-phishing attacks target a specific victim, and messages are modified to specifically address that victim, purportedly coming from an entity that they are familiar with and containing personal information.</p>
+<p>Unlike spear-phishing attacks, Phishing attacks are not personalized to their victims, and are usually sent to Groups at the same time. The goal of phishing attacks is to send a spoofed email (or other communication) that looks as if it is from an authentic organization to a large number of people, banking on the chances that someone will click on that link and provide their personal information or download malware.</p>
+<p>Now that we know the difference let’s see what are the techniques/ tools are available to perform the Spear-Phishing</p>
+<p>Spear-phishing requires more thought and time to achieve than phishing. Spear-phishing attackers try to obtain as much personal information about their victims as possible to make the emails that they send look legitimate and to increase their chance of fooling recipients. Because of the personal level of these emails, it is more difficult to identify spear-phishing attacks than to identify phishing attacks conducted at a wide scale. This is why spear-phishing attacks are becoming more prevalent.</p>
+<p>There are multiple open source tools available for Spear Phishing</p>
+<blockquote>
+<p>1&gt;Sendmail.rb</p>
+</blockquote>
+<blockquote>
+<p>2&gt; Phishing Frenzy</p>
+</blockquote>
+<blockquote>
+<p>3&gt; <a href="https://getgophish.com/">Gophish</a></p>
+</blockquote>
+<p>Case Study and Demo :)</p>
+<p><strong>Gathering Info:</strong></p>
+<p>For better understanding of how this attack works Lets consider a following Example.</p>
+<p><strong><em>Scenario:</em></strong></p>
+<p>The attacker does research on their targets, find out who they regularly communicate with, and sends a personalized email to the target.</p>
+<p>Attacker uses a social engineering techniques to gather more info about target (email id, contact, Bank Name and work location). Then Attacker creates the mirrored website. (Which can be done using tools like SET-ToolKit, HTTrack etc.) As this is blog about phishing, I will not go in depth of website cloning. Attacker will buy domain which has some resemblance with the domain of Victim’s Bank to increase the chance for successful phishing attack.</p>
+<p>Next, the attacker creates a fake e-mail with subject “ Account Credentials are about to expire” with legitimate mail body and send the e-mail to Victim stating that his account credentials are about to expire and a link to the Login page (Attacker’s Mirrored Website). Once Victim clicks on the link and submits the credentials, attacker redirects Victim to the legitimate Altoro Bank’s Login page.</p>
+<p><em>Note :</em> To make sure that we succeed in the attack, we have to create really good phishing e-mails which looks legitimate and will make target to click on the link :)</p>
+<p><a href="https://getgophish.com/"><strong>Gophish</strong></a></p>
+<p>Attacker will install and configure the Spear phishing attack.</p>
+<p><img src="/images/blog/1____e26__yrtOLP1p7JtipovKw.png" alt="Running Gophish server">
+Running Gophish server<img src="/images/blog/1__XAejR2v5Nf3GTFCjK3fdjg.png" alt="Gophish server">
+Gophish server</p>
+<p><strong>Creating Mirrored Website</strong></p>
+<p>Mirrored Web Site ( Attacker's Web Server)</p>
+<p><img src="/images/blog/1__QkB7h00CXYJMOr6Fy6CKRQ.png" alt="Mirrored Web Site">
+Mirrored Web Site</p>
+<p><strong>Creating Landing Pages</strong></p>
+<p>Once we create the mirrored website, we configure the Landing Page in Gophish</p>
+<p><img src="/images/blog/1__fqT1wIIsdnKV4W79Ql0__pQ.png" alt="Phishing Campaign Configuration">
+Phishing Campaign Configuration</p>
+<p><strong>As shown in the above screenshots, Gophish provides the following options</strong></p>
+<ul>
+<li><strong>Import Site</strong></li>
+<li><strong>Capture Data</strong></li>
+<li><strong>Capture Passwords</strong></li>
+</ul>
+<p><strong>Redirect to: This feature will redirect user to specified URL once the attack is complete</strong></p>
+<p><strong>Creating Phishing Mail Template</strong></p>
+<p>To increase success rates, these messages often contain urgent explanations on why they need sensitive information. Victims are asked to open a malicious attachment or click on a link that takes them to a spoofed website where they are asked to provide passwords, account numbers, PINs, and access codes. An attacker posing as a friend might ask for usernames and passwords for various websites. In reality, the attackers will use that password, or variations of it, to access different websites that have confidential information such as credit card details or Social Security Numbers.</p>
+<p>Gophish has this feature where you can create the mail template, as shown below.</p>
+<p><img src="/images/blog/1__PS5O5NGHYAoYcvHVYxcZhA.png" alt="Creating Email Template">
+Creating Email Template</p>
+<p><strong><em>Important thing to note here is that we have not mentioned any Name and the exact URL. Rather we have just used {{.FirstName}} and {{URL}}. This modification plays a major role in the attack execution.</em></strong></p>
+<p><strong>Users &amp; Groups</strong></p>
+<p>Now, we have setup the website, created mail template. The next thing we have to do is add Users to whom we will be sending the phishing mail. Gophish has capability to add group of users. We can import bulk users from excel file. This is depicted below.</p>
+<p><img src="/images/blog/1__LR4lXpfAL2N73ngJ4I5qrQ.png" alt="Users and Groups (Victim details)">
+Users and Groups (Victim details)</p>
+<p><strong>Sending Profile</strong></p>
+<p>We have to configure the sending profile for Gophish. In Sending profile, we provide the details of ‘SMTP’ server and the email id (Attacker email) which we are going to use for Phishing.</p>
+<p>Note: We can send the test e-mails to confirm that SMTP Configuration is correct.</p>
+<p><img src="/images/blog/1__oTq2ewMgqog2eN__Cf6Ke0w.png" alt="Sending Profile Configuration">
+Sending Profile Configuration</p>
+<p>Now that we are all set with the configuration, let’s go ahead and create the phishing Campaign. :)</p>
+<p><img src="/images/blog/1__tZXOal__RUfhBFVlth3__EJg.png" alt="Phishing Campaign">
+Phishing Campaign</p>
+<p>The below fields are added in the Campaign:</p>
+<p>1. Name of the Campaign</p>
+<p>2. Email Template : This is the same template which we created in this document</p>
+<p>3. Landing Page: This is the link which we have included in our Email Template ( Attacker’s Web site)</p>
+<p>4. URL: This is the most important part of the campaign. This is the go phish listener URL.</p>
+<p>5. Schedule : You can schedule the phishing attack</p>
+<p>6. Sending Profile: This the profile which has details of SMTP server and Attacker’s Email ID</p>
+<p>7. Group Name: Targeted users</p>
+<p>Once we provide all the details and click on launch campaign, we are all done and now we are waiting for our victim to open the email and click the link. :)</p>
+<p><img src="/images/blog/1____H13EZ92v6gYJSYH4u6z__w.png" alt="Victim’s mail account">
+Victim’s mail account</p>
+<p>Gophish will provide us with the status of our Spear Phishing Campaign</p>
+<p><strong>1&gt; Sending Email</strong></p>
+<p><img src="/images/blog/1__f87yu__61aw__MuTjFOWu__wg.png" alt="Gophish phishing campaign status">
+Gophish phishing campaign status</p>
+<p><strong>2&gt; Mail Sent</strong></p>
+<p><img src="/images/blog/1__NfCqu__UJokDH0J__78bFSfw.png" alt="Email Sent to Victim">
+Email Sent to Victim</p>
+<p><strong>3&gt;Victim Clicked the Link</strong></p>
+<p><img src="/images/blog/1__Q4Meot8ft__5h__krZmtfFpA.png" alt=""></p>
+<p><strong>4&gt; Victim’s captured data</strong></p>
+<p><img src="/images/blog/1____KIsXrJ80LluXFGQWV4Wfg.png" alt="Victim’s Credentials Captured">
+Victim’s Credentials Captured</p>
+<p>Gophish also gives you functionality to replay the same credentials :)</p>
+<p>This is just an informative blog on Gophish and Spear Phishing attack. There are still so many things that we can tweak and perform different kind of phishing attacks with different tools and different methodologies.</p>
+
+        </div>
+        
+        
+
+<div class="social-share pt-4">
+	<h4>Share:</h4>
+	
+	<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fthenetsec.github.io%2fblog%2f2017-10-18_spear-phishing-with-go-phish-framework-516489b59715%2f" target="_blank"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Spear%20Phishing%20with%20Go%20phish%20Framework&amp;url=https%3a%2f%2fthenetsec.github.io%2fblog%2f2017-10-18_spear-phishing-with-go-phish-framework-516489b59715%2f"
+		target="_blank" rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="https://plus.google.com/share?url=https%3a%2f%2fthenetsec.github.io%2fblog%2f2017-10-18_spear-phishing-with-go-phish-framework-516489b59715%2f" target="_blank"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--google resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M11.37 12.93c-.73-.52-1.4-1.27-1.4-1.5 0-.43.03-.63.98-1.37 1.23-.97 1.9-2.23 1.9-3.57 0-1.22-.36-2.3-1-3.05h.5c.1 0 .2-.04.28-.1l1.36-.98c.16-.12.23-.34.17-.54-.07-.2-.25-.33-.46-.33H7.6c-.66 0-1.34.12-2 .35-2.23.76-3.78 2.66-3.78 4.6 0 2.76 2.13 4.85 5 4.9-.07.23-.1.45-.1.66 0 .43.1.83.33 1.22h-.08c-2.72 0-5.17 1.34-6.1 3.32-.25.52-.37 1.04-.37 1.56 0 .5.13.98.38 1.44.6 1.04 1.84 1.86 3.55 2.28.87.23 1.82.34 2.8.34.88 0 1.7-.1 2.5-.34 2.4-.7 3.97-2.48 3.97-4.54 0-1.97-.63-3.15-2.33-4.35zm-7.7 4.5c0-1.42 1.8-2.68 3.9-2.68h.05c.45 0 .9.07 1.3.2l.42.28c.96.66 1.6 1.1 1.77 1.8.05.16.07.33.07.5 0 1.8-1.33 2.7-3.96 2.7-1.98 0-3.54-1.23-3.54-2.8zM5.54 3.9c.33-.38.75-.58 1.23-.58h.05c1.35.05 2.64 1.55 2.88 3.35.14 1.02-.08 1.97-.6 2.55-.32.37-.74.56-1.23.56h-.03c-1.32-.04-2.63-1.6-2.87-3.4-.13-1 .08-1.92.58-2.5zM23.5 9.5h-3v-3h-2v3h-3v2h3v3h2v-3h3" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="mailto:?subject=Spear%20Phishing%20with%20Go%20phish%20Framework&amp;body=https%3a%2f%2fthenetsec.github.io%2fblog%2f2017-10-18_spear-phishing-with-go-phish-framework-516489b59715%2f" target="_self"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17 0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1 0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08 0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+</div>
+        
+        
+        <div class="mt-5">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="https://twitter.com/7echsec"><i class="ti-twitter-alt"></i></a></li>
+						
+						<li class="list-inline-item"><a href="https://in.linkedin.com/in/pratik-shah-8a589220"><i class="ti-linkedin"></i></a></li>
+						
+						<li class="list-inline-item"><a href="https://github.com/pr4tik"><i class="ti-dribbble"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://thenetsec.github.io">
+					</a>
+					<p>copyright © 2019</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+
+<!-- JS Plugins -->
+
+<script src="https://thenetsec.github.io/plugins/jquery/jquery.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/slick/slick.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="https://thenetsec.github.io/plugins/wow/wow.min.js"></script>
+
+<!-- Main Script -->
+
+<script src="https://thenetsec.github.io/js/script.min.js"></script>
+<!-- google analitycs -->
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+
+</html>
