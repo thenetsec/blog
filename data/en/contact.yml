@@ -1,0 +1,11 @@
+############################## Contact #############################
+contact:
+  enable : true
+  title : Contact Me
+  subtitle : Contact Details
+  content : You can reach me on below email. :)
+  form_Action: "#submit" #contact form works with https://formspree.io
+  
+  contact_Details :
+    - icon : ti-email # themify icon pack : https://themify.me/themify-icons
+      info : "Email: pratik.mhaswadkar@gmail.com"

@@ -1,0 +1,10 @@
+############################# About ###################################
+about:
+  enable : true
+  title : About Me
+  about_Item :
+  - icon : "ti-user" # themify icon pack : https://themify.me/themify-icons
+    link : "https://in.linkedin.com/in/pratik-shah-8a589220"
+    title : Information Security Geek and Enthusiast
+    content : I am an information security enthusianst with over 9+ years of experience in Cyber Security domain. Apart from my day to day Penetration testng work, I like to contribute in opensoure projects/platforms. I am keen on learning new exploitiatin techniques/methods.
+---
