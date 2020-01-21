@@ -1,5 +1,5 @@
 ################################# Default configuration ###################
-baseURL = "https://thenetsec.github.io"
+baseURL = "https://thenetsec.github.io/blog/"
 title = "TheNetSec"
 theme = "meghna-hugo"
 # post pagination
